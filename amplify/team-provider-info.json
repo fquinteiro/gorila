@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "gorila-dev-20191019144057-authRole",
+            "UnauthRoleArn": "arn:aws:iam::242766887556:role/gorila-dev-20191019144057-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::242766887556:role/gorila-dev-20191019144057-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "gorila-dev-20191019144057-deployment",
+            "UnauthRoleName": "gorila-dev-20191019144057-unauthRole",
+            "StackName": "gorila-dev-20191019144057",
+            "StackId": "arn:aws:cloudformation:us-east-1:242766887556:stack/gorila-dev-20191019144057/9befd380-f297-11e9-aaa8-122d883fe268"
+        },
+        "categories": {
+            "auth": {
+                "gorila05463deb": {}
+            }
+        }
+    }
+}

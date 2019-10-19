@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "gorila",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authgorila05463deb",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

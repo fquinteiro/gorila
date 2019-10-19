@@ -1,0 +1,25 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateInvestment($input: CreateInvestmentInput!) {
+  createInvestment(input: $input) {
+    id
+    type
+    date
+    value
+  }
+}
+mutation UpdateInvestment($input: UpdateInvestmentInput!) {
+  updateInvestment(input: $input) {
+    id
+    type
+    date
+    value
+  }
+}
+mutation DeleteInvestment($input: DeleteInvestmentInput!) {
+  deleteInvestment(input: $input) {
+    id
+    type
+    date
+    value
+  }
+}

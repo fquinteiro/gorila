@@ -1,0 +1,6 @@
+type investment @model {
+  id: ID!
+  type: String!
+  date: String!
+  value: Float!
+}

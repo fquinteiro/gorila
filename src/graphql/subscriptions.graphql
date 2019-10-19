@@ -1,0 +1,25 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateInvestment {
+  onCreateInvestment {
+    id
+    type
+    date
+    value
+  }
+}
+subscription OnUpdateInvestment {
+  onUpdateInvestment {
+    id
+    type
+    date
+    value
+  }
+}
+subscription OnDeleteInvestment {
+  onDeleteInvestment {
+    id
+    type
+    date
+    value
+  }
+}
