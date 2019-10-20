@@ -1,0 +1,46 @@
+h1 {
+  text-align: center;
+}
+
+p {
+  display: contents;
+  font-size: 24px;
+}
+
+.container {
+  position: relative;
+  display: grid;
+	grid-template-areas:
+		". invest invest ."
+		". rendaFixa rendaVariavel ."
+    ". graph graph."
+    ;
+    grid-template-columns: 200px auto  auto 200px;
+    grid-template-rows: auto auto auto;
+    height: 100vh;
+}
+
+mat-form-field {
+  margin: 50px 20px;
+}
+
+
+.invest {
+  grid-area: invest;
+  text-align: center;
+}
+
+.rendaFixa {
+  grid-area: rendaFixa;
+}
+
+.rendaVariavel {
+  grid-area: rendaVariavel;
+}
+
+.graph {
+  grid-area: graph;
+  text-align: center;
+}
+
+
