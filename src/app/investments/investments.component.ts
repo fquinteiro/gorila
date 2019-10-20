@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Auth } from 'aws-amplify';
 import { APIService } from '../API.service';
 import { Investment } from './investment';
+import { Chart } from 'chart.js'
 
 @Component({
   selector: 'app-investments',
@@ -25,9 +26,11 @@ export class InvestmentsComponent implements OnInit {
     items: [],
     sum: 0
   }
+  public investGraph: [];
+
   constructor(private api: APIService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     Auth.currentAuthenticatedUser({
       bypassCache: false
     }).then(async user => {
@@ -36,14 +39,15 @@ export class InvestmentsComponent implements OnInit {
     })
     .catch(err => console.log(err));
 
-    this.getInvestments();
+    await this.getInvestments();
+    this.getGraph();
   }
 
-  async createInvestment() {
+  public async createInvestment() {
     await this.api.CreateInvestment(this.investment);
   }
 
-  async getInvestments() {
+  public async getInvestments() {
     this.investments = await this.api.ListInvestments();
     this.investments = this.investments.items.sort((a, b) => a.date < b.date);
     this.investments.map(investment => {
@@ -57,8 +61,43 @@ export class InvestmentsComponent implements OnInit {
     })
   }
 
+  public async deleteInvestment(investment){
+    await this.api.DeleteInvestment(investment.id)
+  }
+
   public trackByFunc(index, item) {
     return item.id;
   }
+
+  public getGraph() {
+    this.investGraph = new Chart('investmentGraph', {
+      type: 'doughnut',
+      data: {
+          labels: ['Renda Fixa', 'Renda Variavel'],
+          datasets: [{
+              label: 'Valor Percentual',
+              data: [this.rendaFixa.sum, this.rendaVariavel.sum],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)'
+              ],
+          }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: "Resumo da carteira"
+        }
+      }
+    });
+
+
+  }
+
+
 
 }

@@ -40,7 +40,7 @@ registerLocaleData(localeFr, 'fr');
     MatIconModule,
     MatNativeDateModule,
     MatButtonModule,
-    NgxMaskModule.forRoot(options),
+    NgxMaskModule.forRoot(options)
   ],
   providers: [AmplifyService],
   bootstrap: [AppComponent]

@@ -33,24 +33,28 @@
 
   <section class="rendaFixa">
     <p>Renda Fixa</p>
-    <ul>
+    <ul class="investmentList">
       <div *ngFor="let fixa of rendaFixa?.items; trackBy: trackByFunc">
-        <li>{{ fixa?.date | date: 'dd/MM/yyyy' }} {{fixa?.value | number: '1.2' }}</li>
+        <li>{{ fixa?.date | date: 'dd/MM/yyyy' }} {{fixa?.value | number: '1.2' }}
+          <i (click)=deleteInvestment(fixa) class="delete material-icons">clear</i>
+        </li>
       </div>
     </ul>
   </section>
 
   <section class="rendaVariavel">
       <p>Renda Variável</p>
-      <ul>
-          <div *ngFor="let variavel of rendaVariavel?.items; trackBy: trackByFunc">
-            <li>{{ variavel?.date | date: 'dd/MM/yyyy' }} {{variavel?.value | number: '1.2' }}</li>
-          </div>
-        </ul>
+      <ul class="investmentList">
+        <div *ngFor="let variavel of rendaVariavel?.items; trackBy: trackByFunc">
+          <li>{{ variavel?.date | date: 'dd/MM/yyyy' }} {{variavel?.value | number: '1.2' }}
+            <i (click)=deleteInvestment(variavel) class="delete material-icons">clear</i>
+          </li>
+        </div>
+      </ul>
   </section>
 
   <section class="graph">
-      <p>Resumo da Carteira</p>
+      <canvas id="investmentGraph"></canvas>
   </section>
 
 </div>
