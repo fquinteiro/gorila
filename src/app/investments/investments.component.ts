@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from 'aws-amplify';
+import { Chart } from 'chart.js';
 import { APIService } from '../API.service';
 import { Investment } from './investment';
-import { Chart } from 'chart.js'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-investments',
@@ -28,7 +29,7 @@ export class InvestmentsComponent implements OnInit {
   }
   public investGraph: [];
 
-  constructor(private api: APIService) { }
+  constructor(private api: APIService, private router: Router) { }
 
   async ngOnInit() {
     Auth.currentAuthenticatedUser({
@@ -37,7 +38,7 @@ export class InvestmentsComponent implements OnInit {
       this.userId = user.attributes.sub;
       this.userName = user.username;
     })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
 
     await this.getInvestments();
     this.getGraph();
@@ -75,17 +76,17 @@ export class InvestmentsComponent implements OnInit {
     this.rendaVariavel.sum += investment.value;
   }
 
-  public async deleteInvestment(investment){
+  public async deleteInvestment(investment) {
     await this.api.DeleteInvestment({ id: investment.id })
     if (investment.type === "RENDA_VARIAVEL") {
       this.rendaVariavel.items.splice(this.rendaVariavel.items.findIndex((i) => {
-          return i.id === investment.id;
+        return i.id === investment.id;
       }), 1)
       this.rendaVariavel.sum -= investment.value;
     } else {
       this.rendaFixa.items.splice(this.rendaFixa.items.findIndex((i) => {
         return i.id === investment.id;
-    }), 1);
+      }), 1);
       this.rendaVariavel.sum -= investment.value;
     }
   }
@@ -94,23 +95,31 @@ export class InvestmentsComponent implements OnInit {
     return item.id;
   }
 
+  public logOut() {
+    Auth.signOut({ global: true })
+    .then(data => {
+      this.router.navigate(['/auth']);
+    })
+    .catch(err => console.log(err));
+  }
+
   public getGraph() {
     this.investGraph = new Chart('investmentGraph', {
       type: 'doughnut',
       data: {
-          labels: ['Renda Fixa', 'Renda Variavel'],
-          datasets: [{
-              label: 'Valor Percentual',
-              data: [this.rendaFixa.sum, this.rendaVariavel.sum],
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)'
-              ],
-          }]
+        labels: ['Renda Fixa', 'Renda Variavel'],
+        datasets: [{
+          label: 'Valor Percentual',
+          data: [this.rendaFixa.sum, this.rendaVariavel.sum],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)'
+          ],
+        }]
       },
       options: {
         title: {
@@ -119,10 +128,6 @@ export class InvestmentsComponent implements OnInit {
         }
       }
     });
-
-
   }
-
-
 
 }

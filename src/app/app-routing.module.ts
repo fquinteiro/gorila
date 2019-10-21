@@ -1,12 +1,13 @@
-import { AuthComponent } from './auth/auth.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 import { InvestmentsComponent } from './investments/investments.component';
-
 
 const routes: Routes = [{
   path: "investments",
-  component: InvestmentsComponent
+  component: InvestmentsComponent,
+  canActivate: [AuthGuard]
 },
 {
   path: "login",

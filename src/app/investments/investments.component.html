@@ -1,5 +1,7 @@
 
-<h1>Carteira de Investimentos</h1>
+<app-header (logOut)="logOut()"></app-header>
+
+<h1>Carteira de Investimentos de {{ this.userName | titlecase }}</h1>
 
 <div class="container">
   <section class="invest">
