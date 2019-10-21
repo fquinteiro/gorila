@@ -6,7 +6,7 @@
 <div class="container">
   <section class="invest">
   <div class="addInvest">
-    <p>Adicionar Investimento:</p>
+    <p class="subTitle">Adicionar Investimento:</p>
 
       <mat-form-field>
         <mat-label>Tipo</mat-label>
@@ -34,7 +34,7 @@
   </section>
 
   <section class="rendaFixa">
-    <p>Renda Fixa</p>
+    <p class="subTitle">Renda Fixa</p>
     <ul class="investmentList">
       <div *ngFor="let fixa of rendaFixa?.items; trackBy: trackByFunc">
         <li>{{ fixa?.date | date: 'dd/MM/yyyy' }} - R$ {{fixa?.value | number: '1.2' }}
@@ -45,7 +45,7 @@
   </section>
 
   <section class="rendaVariavel">
-      <p>Renda Variável</p>
+      <p class="subTitle">Renda Variável</p>
       <ul class="investmentList">
         <div *ngFor="let variavel of rendaVariavel?.items; trackBy: trackByFunc">
           <li>{{ variavel?.date | date: 'dd/MM/yyyy' }} - R$ {{variavel?.value | number: '1.2' }}

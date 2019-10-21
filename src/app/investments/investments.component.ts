@@ -104,10 +104,11 @@ export class InvestmentsComponent implements OnInit {
   }
 
   public getGraph() {
+    let total = this.rendaFixa.sum + this.rendaVariavel.sum;
     this.investGraph = new Chart('investmentGraph', {
       type: 'doughnut',
       data: {
-        labels: ['Renda Fixa', 'Renda Variavel'],
+        labels: [`${ (this.rendaFixa.sum/total*100).toFixed(2) }% Renda Fixa`, `${ (this.rendaVariavel.sum/total*100).toFixed(2) }%  Renda Variavel`],
         datasets: [{
           label: 'Valor Percentual',
           data: [this.rendaFixa.sum, this.rendaVariavel.sum],
@@ -122,9 +123,21 @@ export class InvestmentsComponent implements OnInit {
         }]
       },
       options: {
+        legend: {
+          position: 'left',
+          labels: {
+            fontSize: 30,
+            fontFamily: "'Roboto', 'sans-serifa'"
+          }
+
+        },
         title: {
           display: true,
-          text: "Resumo da carteira"
+          text: "Resumo da carteira",
+          fontSize: 24,
+          fontFamily: "'Roboto', 'sans-serifa'",
+          fontColor: '#000',
+          padding: 50
         }
       }
     });

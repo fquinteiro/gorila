@@ -21,10 +21,31 @@ p {
   grid-row-gap: 20px;
 }
 
+@media (max-width: 960px) {
+  .container {
+    grid-template-areas:
+		". invest ."
+    ". rendaFixa ."
+    ". rendaVariavel ."
+    ". graph ."
+    ;
+  grid-template-columns: 50px 1fr 50px;
+  }
+}
+
+@media (max-width: 460px) {
+  .container{
+    max-width: 400px;
+  }
+}
+
 mat-form-field {
   margin: 50px 20px;
 }
 
+.subTitle{
+  font-weight: bold;
+}
 
 .invest {
   grid-area: invest;
@@ -57,13 +78,18 @@ mat-form-field {
 
 .delete {
   float: right;
-  color: red;
+  color: white;
   cursor: pointer;
+  border-radius: 50%;
+  background-color: gray;
+  font-size: 22px;
 }
 
 .createInvestment {
-  color: green;
+  color: white;
+  background-color: #10C0C6;
   cursor: pointer;
+  border-radius: 50%;
   font-size: 43px;
   font-weight: bold;
   vertical-align: middle;
