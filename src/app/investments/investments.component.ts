@@ -45,6 +45,12 @@ export class InvestmentsComponent implements OnInit {
 
   public async createInvestment() {
     await this.api.CreateInvestment(this.investment);
+    this.investment.type === "RENDA_VARIAVEL" ? this.addRendaVariavel(this.investment) : this.addRendaFixa(this.investment);
+    this.investment = {
+      type: "",
+      value: 0,
+      date: ""
+    }
   }
 
   public async getInvestments() {
@@ -52,17 +58,36 @@ export class InvestmentsComponent implements OnInit {
     this.investments = this.investments.items.sort((a, b) => a.date < b.date);
     this.investments.map(investment => {
       if (investment.type === "RENDA_FIXA") {
-        this.rendaFixa.items.push(investment);
-        this.rendaFixa.sum += investment.value;
+        this.addRendaFixa(investment);
       } else {
-        this.rendaVariavel.items.push(investment);
-        this.rendaVariavel.sum += investment.value;
+        this.addRendaVariavel(investment);
       }
     })
   }
 
+  public async addRendaFixa(investment) {
+    this.rendaFixa.items.push(investment);
+    this.rendaFixa.sum += investment.value;
+  }
+
+  public async addRendaVariavel(investment) {
+    this.rendaVariavel.items.push(investment);
+    this.rendaVariavel.sum += investment.value;
+  }
+
   public async deleteInvestment(investment){
-    await this.api.DeleteInvestment(investment.id)
+    await this.api.DeleteInvestment({ id: investment.id })
+    if (investment.type === "RENDA_VARIAVEL") {
+      this.rendaVariavel.items.splice(this.rendaVariavel.items.findIndex((i) => {
+          return i.id === investment.id;
+      }), 1)
+      this.rendaVariavel.sum -= investment.value;
+    } else {
+      this.rendaFixa.items.splice(this.rendaFixa.items.findIndex((i) => {
+        return i.id === investment.id;
+    }), 1);
+      this.rendaVariavel.sum -= investment.value;
+    }
   }
 
   public trackByFunc(index, item) {

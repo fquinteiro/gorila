@@ -15,9 +15,10 @@ p {
 		". rendaFixa rendaVariavel ."
     ". graph graph."
     ;
-    grid-template-columns: 200px auto  auto 200px;
-    grid-template-rows: auto auto auto;
-    height: 100vh;
+  grid-template-columns: 100px auto  auto 100px;
+  grid-template-rows: auto auto auto;
+  height: 100vh;
+  grid-row-gap: 20px;
 }
 
 mat-form-field {
@@ -50,7 +51,7 @@ mat-form-field {
 }
 
 .investmentList li {
-  padding: 10px;
+  padding: 10px 30px;;
   border-bottom: 1px solid #dddddd;
 }
 
@@ -58,6 +59,14 @@ mat-form-field {
   float: right;
   color: red;
   cursor: pointer;
+}
+
+.createInvestment {
+  color: green;
+  cursor: pointer;
+  font-size: 43px;
+  font-weight: bold;
+  vertical-align: middle;
 }
 
 #investmentGraph {

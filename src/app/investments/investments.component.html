@@ -27,7 +27,7 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="createInvestment()">Incluir</button>
+      <i (click)=createInvestment() class="createInvestment material-icons">add</i>
   </div>
   </section>
 
@@ -35,7 +35,7 @@
     <p>Renda Fixa</p>
     <ul class="investmentList">
       <div *ngFor="let fixa of rendaFixa?.items; trackBy: trackByFunc">
-        <li>{{ fixa?.date | date: 'dd/MM/yyyy' }} {{fixa?.value | number: '1.2' }}
+        <li>{{ fixa?.date | date: 'dd/MM/yyyy' }} - R$ {{fixa?.value | number: '1.2' }}
           <i (click)=deleteInvestment(fixa) class="delete material-icons">clear</i>
         </li>
       </div>
@@ -46,7 +46,7 @@
       <p>Renda Variável</p>
       <ul class="investmentList">
         <div *ngFor="let variavel of rendaVariavel?.items; trackBy: trackByFunc">
-          <li>{{ variavel?.date | date: 'dd/MM/yyyy' }} {{variavel?.value | number: '1.2' }}
+          <li>{{ variavel?.date | date: 'dd/MM/yyyy' }} - R$ {{variavel?.value | number: '1.2' }}
             <i (click)=deleteInvestment(variavel) class="delete material-icons">clear</i>
           </li>
         </div>
