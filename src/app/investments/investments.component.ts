@@ -52,6 +52,7 @@ export class InvestmentsComponent implements OnInit {
       value: 0,
       date: ""
     }
+    this.getGraph()
   }
 
   public async getInvestments() {
@@ -89,6 +90,7 @@ export class InvestmentsComponent implements OnInit {
       }), 1);
       this.rendaVariavel.sum -= investment.value;
     }
+    this.getGraph()
   }
 
   public trackByFunc(index, item) {
