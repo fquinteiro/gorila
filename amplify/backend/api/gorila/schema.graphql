@@ -3,4 +3,5 @@ type investment @model {
   type: String!
   date: String!
   value: Float!
+  userId: String!
 }

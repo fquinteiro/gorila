@@ -10,6 +10,7 @@ export type CreateInvestmentInput = {
   type: string;
   date: string;
   value: number;
+  userId: string;
 };
 
 export type UpdateInvestmentInput = {
@@ -17,6 +18,7 @@ export type UpdateInvestmentInput = {
   type?: string | null;
   date?: string | null;
   value?: number | null;
+  userId?: string | null;
 };
 
 export type DeleteInvestmentInput = {
@@ -28,6 +30,7 @@ export type ModelinvestmentFilterInput = {
   type?: ModelStringFilterInput | null;
   date?: ModelStringFilterInput | null;
   value?: ModelFloatFilterInput | null;
+  userId?: ModelStringFilterInput | null;
   and?: Array<ModelinvestmentFilterInput | null> | null;
   or?: Array<ModelinvestmentFilterInput | null> | null;
   not?: ModelinvestmentFilterInput | null;
@@ -77,6 +80,7 @@ export type CreateInvestmentMutation = {
   type: string;
   date: string;
   value: number;
+  userId: string;
 };
 
 export type UpdateInvestmentMutation = {
@@ -85,6 +89,7 @@ export type UpdateInvestmentMutation = {
   type: string;
   date: string;
   value: number;
+  userId: string;
 };
 
 export type DeleteInvestmentMutation = {
@@ -93,6 +98,7 @@ export type DeleteInvestmentMutation = {
   type: string;
   date: string;
   value: number;
+  userId: string;
 };
 
 export type GetInvestmentQuery = {
@@ -101,6 +107,7 @@ export type GetInvestmentQuery = {
   type: string;
   date: string;
   value: number;
+  userId: string;
 };
 
 export type ListInvestmentsQuery = {
@@ -111,6 +118,7 @@ export type ListInvestmentsQuery = {
     type: string;
     date: string;
     value: number;
+    userId: string;
   } | null> | null;
   nextToken: string | null;
 };
@@ -121,6 +129,7 @@ export type OnCreateInvestmentSubscription = {
   type: string;
   date: string;
   value: number;
+  userId: string;
 };
 
 export type OnUpdateInvestmentSubscription = {
@@ -129,6 +138,7 @@ export type OnUpdateInvestmentSubscription = {
   type: string;
   date: string;
   value: number;
+  userId: string;
 };
 
 export type OnDeleteInvestmentSubscription = {
@@ -137,6 +147,7 @@ export type OnDeleteInvestmentSubscription = {
   type: string;
   date: string;
   value: number;
+  userId: string;
 };
 
 @Injectable({
@@ -153,6 +164,7 @@ export class APIService {
           type
           date
           value
+          userId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -173,6 +185,7 @@ export class APIService {
           type
           date
           value
+          userId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -193,6 +206,7 @@ export class APIService {
           type
           date
           value
+          userId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -211,6 +225,7 @@ export class APIService {
           type
           date
           value
+          userId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -235,6 +250,7 @@ export class APIService {
             type
             date
             value
+            userId
           }
           nextToken
         }
@@ -265,6 +281,7 @@ export class APIService {
           type
           date
           value
+          userId
         }
       }`
     )
@@ -281,6 +298,7 @@ export class APIService {
           type
           date
           value
+          userId
         }
       }`
     )
@@ -297,6 +315,7 @@ export class APIService {
           type
           date
           value
+          userId
         }
       }`
     )

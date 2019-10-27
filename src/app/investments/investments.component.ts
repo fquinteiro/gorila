@@ -16,7 +16,8 @@ export class InvestmentsComponent implements OnInit {
   public investment: Investment = {
     type: "",
     value: 0,
-    date: ""
+    date: "",
+    userId: ""
   }
   public investments: any;
   public rendaVariavel = {
@@ -27,15 +28,16 @@ export class InvestmentsComponent implements OnInit {
     items: [],
     sum: 0
   }
-  public investGraph: [];
+  public investGraph: Chart;
 
   constructor(private api: APIService, private router: Router) { }
 
   async ngOnInit() {
-    Auth.currentAuthenticatedUser({
+    await Auth.currentAuthenticatedUser({
       bypassCache: false
     }).then(async user => {
       this.userId = user.attributes.sub;
+      this.investment.userId = this.userId
       this.userName = user.username;
     })
       .catch(err => console.log(err));
@@ -46,18 +48,32 @@ export class InvestmentsComponent implements OnInit {
 
   public async createInvestment() {
     await this.api.CreateInvestment(this.investment);
-    this.investment.type === "RENDA_VARIAVEL" ? this.addRendaVariavel(this.investment) : this.addRendaFixa(this.investment);
     this.investment = {
       type: "",
       value: 0,
-      date: ""
+      date: "",
+      userId: this.userId
     }
+    await this.getInvestments();
     this.getGraph()
   }
 
+  private async cleanRenda() {
+    this.rendaVariavel = {
+      items: [],
+      sum: 0
+    }
+
+    this.rendaFixa = {
+      items: [],
+      sum: 0
+    }
+  }
+
   public async getInvestments() {
-    this.investments = await this.api.ListInvestments();
-    this.investments = this.investments.items.sort((a, b) => a.date < b.date);
+    this.cleanRenda();
+    this.investments = await this.api.ListInvestments({ userId: { eq: this.userId }});
+    this.investments = this.investments.items.sort((a, b) =>  new Date(b.date).getTime() - new Date(a.date).getTime());
     this.investments.map(investment => {
       if (investment.type === "RENDA_FIXA") {
         this.addRendaFixa(investment);
@@ -67,30 +83,20 @@ export class InvestmentsComponent implements OnInit {
     })
   }
 
-  public async addRendaFixa(investment) {
+  private async addRendaFixa(investment) {
     this.rendaFixa.items.push(investment);
     this.rendaFixa.sum += investment.value;
   }
 
-  public async addRendaVariavel(investment) {
+  private async addRendaVariavel(investment) {
     this.rendaVariavel.items.push(investment);
     this.rendaVariavel.sum += investment.value;
   }
 
   public async deleteInvestment(investment) {
     await this.api.DeleteInvestment({ id: investment.id })
-    if (investment.type === "RENDA_VARIAVEL") {
-      this.rendaVariavel.items.splice(this.rendaVariavel.items.findIndex((i) => {
-        return i.id === investment.id;
-      }), 1)
-      this.rendaVariavel.sum -= investment.value;
-    } else {
-      this.rendaFixa.items.splice(this.rendaFixa.items.findIndex((i) => {
-        return i.id === investment.id;
-      }), 1);
-      this.rendaVariavel.sum -= investment.value;
-    }
-    this.getGraph()
+    await this.getInvestments();
+    this.getGraph();
   }
 
   public trackByFunc(index, item) {

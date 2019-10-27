@@ -5,6 +5,7 @@ subscription OnCreateInvestment {
     type
     date
     value
+    userId
   }
 }
 subscription OnUpdateInvestment {
@@ -13,6 +14,7 @@ subscription OnUpdateInvestment {
     type
     date
     value
+    userId
   }
 }
 subscription OnDeleteInvestment {
@@ -21,5 +23,6 @@ subscription OnDeleteInvestment {
     type
     date
     value
+    userId
   }
 }

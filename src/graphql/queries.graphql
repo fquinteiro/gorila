@@ -5,6 +5,7 @@ query GetInvestment($id: ID!) {
     type
     date
     value
+    userId
   }
 }
 query ListInvestments(
@@ -18,6 +19,7 @@ query ListInvestments(
       type
       date
       value
+      userId
     }
     nextToken
   }

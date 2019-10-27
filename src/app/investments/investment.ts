@@ -1,5 +1,6 @@
 export interface Investment {
   type: string,
   value: number,
-  date: string
+  date: string,
+  userId: string
 }
